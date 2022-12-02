@@ -86,7 +86,7 @@ const SudokuComponent = () => {
   return (
     <StyledDiv direction="column" justifyContent="start">
       <StyledDiv direction="row" justifyContent="center">
-        Suduko Solver
+      Suduko Solver
       </StyledDiv>
       <StyledDiv direction="row" justifyContent="center">
         <StyledDiv direction="row" justifyContent="space-between">
