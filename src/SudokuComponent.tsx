@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { ChangeEvent, useCallback, useState } from "react";
 import Board from "./components/Board";
 import { StyledDiv } from "./Styles";
 
@@ -14,7 +14,9 @@ const grid: Array<Array<number>> = [
   [0, 9, 0, 0, 0, 0, 4, 0, 0],
 ];
 
+
 const SudokuComponent = () => {
+  const [inputValue, setInputValue] = useState("bkasina@leomail.tamuc.edu");
   const [squares, setSquares] = useState<Array<Array<number>>>(grid);
 
   const solveSuduko = useCallback(async (value: Array<Array<number>>) => {
@@ -41,6 +43,35 @@ const SudokuComponent = () => {
       console.log(err);
     }
   }, []);
+
+  const sendEmail = useCallback(async (value: Array<Array<number>>) => {
+    try {
+      const obj = {
+        toEmailAddress: inputValue,
+        solvedPuzzle: squares,
+      };
+      const response = await fetch("/api/email", {
+        method: "POST",
+        body: JSON.stringify(obj),
+        headers: {
+          "Content-type": "application/json",
+        },
+      });
+
+      console.log("status code: ", response.status); // 👉️ 200
+
+      if (!response.ok) {
+        console.log(response);
+        throw new Error(`Error! status: ${response.status}`);
+      }
+
+      const result = await response.json();
+      setSquares(result);
+      console.log(result);
+    } catch (err) {
+      console.log(err);
+    }
+  }, [inputValue,squares]);
 
   const resetSuduko = useCallback(() => {
     setSquares([
@@ -80,13 +111,13 @@ const SudokuComponent = () => {
       }
       setSquares(newSquares);
     },
-    [squares]
+    []
   );
-
+ 
   return (
     <StyledDiv direction="column" justifyContent="start">
       <StyledDiv direction="row" justifyContent="center">
-      Suduko Solver
+        Suduko Solver
       </StyledDiv>
       <StyledDiv direction="row" justifyContent="center">
         <StyledDiv direction="row" justifyContent="space-between">
@@ -98,7 +129,22 @@ const SudokuComponent = () => {
           >
             Solve
           </button>
-
+          <form>
+            <input
+              value={inputValue}
+              onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                setInputValue(e.target.value)
+              }
+              placeholder="Enter the email address"
+            />
+            <button
+              onClick={() => {
+                sendEmail(squares);
+              }}
+            >
+              Send Email
+            </button>
+          </form>
           <button
             onClick={() => {
               resetSuduko();

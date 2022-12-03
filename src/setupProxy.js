@@ -9,4 +9,12 @@ module.exports = function(app) {
       logLevel: 'debug'
     })
   );
+  app.use(
+    '/api/email',
+    createProxyMiddleware({
+      target: 'http://localhost:8080',
+      changeOrigin: true,
+      logLevel: 'debug'
+    })
+  );
 };
