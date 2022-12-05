@@ -1,4 +1,3 @@
-import {css } from "@emotion/react";
 import styled from "@emotion/styled";
 import React from "react";
 import { StyledDiv } from "../Styles";
@@ -21,8 +20,8 @@ const StyledCell = styled.div<{ i: number; j: number }>`
       return "2px 2px 1px 1px";
     } else if (
       (i === 8 && j === 0) ||
-      (i == 2 && j === 0) ||
-      (i == 5 && j === 0)
+      (i === 2 && j === 0) ||
+      (i === 5 && j === 0)
     ) {
       return "1px 1px 2px 2px";
     } else if (
@@ -54,11 +53,10 @@ const Board = (props: Props) => {
         {squares.length > 0 &&
           squares.map((row, i) => {
             return (
-              <StyledDiv direction="row" justifyContent="center">
+              <StyledDiv direction="row" justifyContent="center" key={i}>
                 {row.map((column, j) => {
-                  console.log("for i:"+i+" for j : "+j +"with value :"+column);
                   return (
-                    <StyledCell i={i} j={j}>
+                    <StyledCell i={i} j={j} key={j}>
                       <input
                         style={{
                           height: "100%",
