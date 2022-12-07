@@ -118,13 +118,13 @@ const SudokuComponent = () => {
           if (i === changeI && j === changeJ) {
             newSquares[i][j] = value;
           } else {
-            newSquares[i][j] = grid[i][j];
+            newSquares[i][j] = squares[i][j];
           }
         }
       }
       setSquares(newSquares);
     },
-    []
+    [squares]
   );
 
   return (
