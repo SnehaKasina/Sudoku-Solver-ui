@@ -15,29 +15,31 @@ const StyledCell = styled.div<{ i: number; j: number }>`
     const { i, j } = props;
     // Top Right Bottom Left
     if (i === 0 && j === 0) {
-      return "2px 1px 1px 2px";
+      return "3px 1px 1px 3px";
     } else if (i === 0 && j === 8) {
-      return "2px 2px 1px 1px";
+      return "3px 3px 1px 1px";
     } else if (
       (i === 8 && j === 0) ||
       (i === 2 && j === 0) ||
-      (i === 5 && j === 0)
+      (i === 5 && j === 0) ||
+      (j === 3) ||
+      (j === 6)
     ) {
-      return "1px 1px 2px 2px";
+      return "1px 1px 3px 3px";
     } else if (
       (i === 8 && j === 8) ||
       (i === 2 && j === 8) ||
       (i === 5 && j === 8)
     ) {
-      return "1px 2px 2px 1px";
+      return "1px 3px 3px 1px";
     } else if (i === 0) {
-      return "2px 1px 1px 1px";
+      return "3px 1px 1px 1px";
     } else if (j === 0 && i !== 2 && i !== 5) {
-      return "1px 1px 1px 2px";
+      return "1px 1px 1px 3px";
     } else if (j === 8) {
-      return "1px 2px 1px 1px";
+      return "1px 3px 1px 1px";
     } else if (i === 8 || i === 2 || i === 5) {
-      return "1px 1px 2px 1px";
+      return "1px 1px 3px 1px";
     } else {
       return "1px 1px 1px 1px";
     }

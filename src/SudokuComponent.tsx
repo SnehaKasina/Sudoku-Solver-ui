@@ -53,7 +53,7 @@ const SudokuComponent = () => {
         if (!response.ok) {
           console.log(response);
           alert("Error no Solution found for this suduko");
-          resetSuduko();
+          //resetSuduko();
           throw new Error(`Error! status: ${response.status}`);
         }
 
@@ -64,7 +64,7 @@ const SudokuComponent = () => {
         console.log(err);
       }
     },
-    [resetSuduko]
+    []
   );
 
   const sendEmail = useCallback(async () => {
